@@ -1,0 +1,150 @@
+{
+  "app": {
+    "name": "VoteBox",
+    "tagline": "Biztonságos szervezeti szavazások"
+  },
+  "home": {
+    "heroTitle1": "Biztonságos Szavazás,",
+    "heroTitle2": "Emelt Szinten",
+    "heroDescription": "Modern szavazóplatform közgyűlésekhez, testületi ülésekhez és szervezeti döntésekhez. Valós idejű eredmények, biztonságos titkos szavazás.",
+    "castVote": "Szavazás",
+    "adminLogin": "Admin Belépés",
+    "whyChoose": "Miért a VoteBox?",
+    "featureSecure": "Biztonságos",
+    "featureSecureDesc": "Titkosított szavazás, auditálható eredmények",
+    "featureRealtime": "Valós idejű",
+    "featureRealtimeDesc": "Élő eredmények, azonnali visszajelzés",
+    "featureSimple": "Egyszerű",
+    "featureSimpleDesc": "Könnyű kezelés, regisztráció nélkül",
+    "readyToVote": "Készen állsz?",
+    "readyToVoteDesc": "Add meg az eseménykódot és a belépési kódot a biztonságos szavazáshoz.",
+    "enterBallot": "Szavazólap Megnyitása",
+    "footer": "© 2026 VoteBox. Minden jog fenntartva."
+  },
+  "common": {
+    "loading": "Betöltés...",
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "delete": "Törlés",
+    "edit": "Szerkesztés",
+    "create": "Létrehozás",
+    "back": "Vissza",
+    "next": "Tovább",
+    "submit": "Küldés",
+    "yes": "Igen",
+    "no": "Nem",
+    "abstain": "Tartózkodom"
+  },
+  "auth": {
+    "login": "Bejelentkezés",
+    "logout": "Kijelentkezés",
+    "email": "E-mail cím",
+    "password": "Jelszó",
+    "eventCode": "Esemény kód",
+    "accessCode": "Belépési kód",
+    "adminLogin": "Admin bejelentkezés",
+    "voterLogin": "Szavazói belépés",
+    "enterEventCode": "Add meg az esemény kódját",
+    "enterAccessCode": "Add meg a belépési kódodat",
+    "secureVoting": "Biztonságos Szavazás",
+    "enterCredentials": "Add meg az adataidat a szavazáshoz",
+    "enterBallot": "Belépés",
+    "demoMode": "Demo Mód",
+    "voteEncrypted": "Szavazatod titkosított és anonim",
+    "orTry": "vagy próbáld ki",
+    "eventNotFound": "Esemény nem található",
+    "invalidAccessCode": "Érvénytelen belépési kód",
+    "loginError": "Hiba történt a bejelentkezés során"
+  },
+  "events": {
+    "title": "Események",
+    "create": "Új esemény",
+    "name": "Esemény neve",
+    "description": "Leírás",
+    "startDate": "Kezdés",
+    "endDate": "Befejezés",
+    "status": {
+      "draft": "Vázlat",
+      "scheduled": "Ütemezett",
+      "active": "Aktív",
+      "closed": "Lezárt",
+      "archived": "Archivált"
+    }
+  },
+  "questions": {
+    "title": "Kérdések",
+    "create": "Új kérdés",
+    "text": "Kérdés szövege",
+    "type": {
+      "binary": "Igen/Nem/Tartózkodom",
+      "single": "Egy választás",
+      "multi": "Több választás"
+    },
+    "activate": "Aktiválás",
+    "close": "Lezárás",
+    "results": "Eredmények"
+  },
+  "voting": {
+    "title": "Szavazás",
+    "waitingForQuestion": "Várakozás a következő kérdésre...",
+    "voteSubmitted": "Szavazat rögzítve!",
+    "alreadyVoted": "Már szavaztál erre a kérdésre",
+    "submit": "Szavazat leadása",
+    "confirm": "Biztosan leadod a szavazatod?",
+    "awaitingVote": "Várakozás szavazásra",
+    "awaitingDesc": "A szervező hamarosan elindítja a következő szavazást.",
+    "activeVote": "Aktív szavazás",
+    "confirmVote": "Szavazat megerősítése",
+    "castBallot": "Szavazat leadása",
+    "voteRecorded": "Szavazatod rögzítve",
+    "tapToSelect": "Érintsd meg a választáshoz • Következő képernyőn megerősítés",
+    "cannotChange": "A leadás után a szavazat nem módosítható."
+  },
+  "results": {
+    "title": "Eredmények",
+    "votes": "szavazat",
+    "participation": "Részvétel",
+    "quorum": "Kvórum",
+    "accepted": "Elfogadva",
+    "rejected": "Elutasítva"
+  },
+  "quorum": {
+    "none": "Nincs kvórum",
+    "percentage": "Százalékos",
+    "fixed": "Fix létszám",
+    "noneDesc": "Nincs minimális részvételi követelmény",
+    "percentageDesc": "A résztvevők minimum ennyi százaléka kell jelen legyen",
+    "fixedDesc": "Minimum ennyi résztvevő kell jelen legyen",
+    "notMet": "Nincs meg a kvórum!",
+    "met": "Kvórum megvan",
+    "required": "Szükséges",
+    "present": "Jelen"
+  },
+  "audit": {
+    "title": "Audit napló",
+    "noEntries": "Nincs bejegyzés",
+    "filterAll": "Összes",
+    "filterVote": "Szavazás",
+    "filterQuestion": "Kérdés",
+    "filterEvent": "Esemény",
+    "filterAuth": "Bejelentkezés",
+    "actionVoteCast": "Szavazat leadva",
+    "actionQuestionActivated": "Kérdés aktiválva",
+    "actionQuestionClosed": "Kérdés lezárva",
+    "actionParticipantJoined": "Résztvevő csatlakozott",
+    "actionEventStarted": "Esemény elindítva",
+    "actionEventClosed": "Esemény lezárva"
+  },
+  "super": {
+    "title": "Super Admin",
+    "organizations": "Szervezetek",
+    "totalUsers": "Összes felhasználó",
+    "systemStatus": "Rendszer státusz",
+    "newOrganization": "Új szervezet",
+    "orgName": "Szervezet neve",
+    "orgSlug": "Szervezet azonosító (slug)",
+    "noOrganizations": "Még nincs szervezet létrehozva",
+    "enterOrg": "Belépés",
+    "confirmDelete": "Biztosan törlöd ezt a szervezetet?"
+  }
+}
