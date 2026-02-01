@@ -78,7 +78,8 @@ function DashboardHome() {
     const newEvent = await api.createEvent({
       ...data,
       organization_id: organizationId,
-      created_by: user?.id || '00000000-0000-0000-0000-000000000000',
+      // created_by is nullable in demo mode
+      ...(user?.id ? { created_by: user.id } : {}),
       state: 'draft',
     })
     addEvent(newEvent)
@@ -280,7 +281,7 @@ function EventDetail() {
         quorum_value: 50,
         quorum_percent: 50,
         state: 'active',
-        created_by: '00000000-0000-0000-0000-000000000000',
+        // created_by omitted in demo mode
         created_at: new Date().toISOString(),
       })
     } finally {
@@ -606,7 +607,7 @@ function DemoHelper() {
         event_code: api.generateEventCode(),
         quorum_percent: 50,
         state: 'active',
-        created_by: '00000000-0000-0000-0000-000000000000',
+        // created_by omitted in demo mode
       })
       addEvent(event)
       
