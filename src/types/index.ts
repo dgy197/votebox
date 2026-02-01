@@ -32,7 +32,7 @@ export interface Event {
   quorum_value: number
   quorum_percent: number | null // deprecated, kept for backwards compatibility
   state: EventState
-  created_by: string
+  created_by?: string | null
   created_at: string
 }
 
