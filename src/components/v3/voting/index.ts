@@ -1,2 +1,5 @@
 export { VotingPanel } from './VotingPanel'
 export { VoteResults } from './VoteResults'
+export { ProxyVotingPanel } from './ProxyVotingPanel'
+export { QuorumDisplay } from './QuorumDisplay'
+export { SecretBallotPanel } from './SecretBallotPanel'

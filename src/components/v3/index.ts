@@ -10,7 +10,7 @@ export { MemberList, MemberForm, CSVImportModal } from './member'
 export { MeetingList, MeetingWizard, AgendaEditor } from './meeting'
 
 // Voting
-export { VotingPanel, VoteResults } from './voting'
+export { VotingPanel, VoteResults, ProxyVotingPanel, QuorumDisplay, SecretBallotPanel } from './voting'
 
 // Schedule (Doodle-style scheduling)
 export { ScheduleCreator, ScheduleVoting, ScheduleResults, MeetingScheduleTab } from './schedule'
