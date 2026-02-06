@@ -8,7 +8,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- ORGANIZATIONS - Szervezetek
 -- ============================================
 CREATE TABLE IF NOT EXISTS organizations (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
   type TEXT NOT NULL CHECK (type IN ('condominium', 'company', 'association', 'cooperative', 'other')),
   -- condominium = társasház, company = cég, association = egyesület, cooperative = szövetkezet
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS organizations (
 -- MEMBERS - Tagok
 -- ============================================
 CREATE TABLE IF NOT EXISTS members (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
   name TEXT NOT NULL,
@@ -47,7 +47,7 @@ CREATE INDEX idx_members_email ON members(email);
 -- PROXIES - Meghatalmazások
 -- ============================================
 CREATE TABLE IF NOT EXISTS proxies (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   grantor_id UUID REFERENCES members(id) ON DELETE CASCADE, -- meghatalmazó
   grantee_id UUID REFERENCES members(id) ON DELETE CASCADE, -- meghatalmazott
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS proxies (
 -- MEETINGS - Gyűlések
 -- ============================================
 CREATE TABLE IF NOT EXISTS meetings (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   description TEXT,
@@ -102,7 +102,7 @@ ALTER TABLE proxies ADD CONSTRAINT fk_proxies_meeting
 -- SCHEDULE_OPTIONS - Időpont opciók (Doodle)
 -- ============================================
 CREATE TABLE IF NOT EXISTS schedule_options (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   meeting_id UUID REFERENCES meetings(id) ON DELETE CASCADE,
   datetime TIMESTAMPTZ NOT NULL,
   duration_minutes INT DEFAULT 60,
@@ -116,7 +116,7 @@ CREATE INDEX idx_schedule_options_meeting ON schedule_options(meeting_id);
 -- SCHEDULE_VOTES - Időpont szavazatok
 -- ============================================
 CREATE TABLE IF NOT EXISTS schedule_votes (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   option_id UUID REFERENCES schedule_options(id) ON DELETE CASCADE,
   member_id UUID REFERENCES members(id) ON DELETE CASCADE,
   vote TEXT NOT NULL CHECK (vote IN ('yes', 'maybe', 'no')),
@@ -131,7 +131,7 @@ CREATE INDEX idx_schedule_votes_option ON schedule_votes(option_id);
 -- AGENDA_ITEMS - Napirendi pontok
 -- ============================================
 CREATE TABLE IF NOT EXISTS agenda_items (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   meeting_id UUID REFERENCES meetings(id) ON DELETE CASCADE,
   order_num INT NOT NULL,
   title TEXT NOT NULL,
@@ -155,7 +155,7 @@ CREATE INDEX idx_agenda_items_meeting ON agenda_items(meeting_id);
 -- VOTES - Szavazatok
 -- ============================================
 CREATE TABLE IF NOT EXISTS votes (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   agenda_item_id UUID REFERENCES agenda_items(id) ON DELETE CASCADE,
   member_id UUID REFERENCES members(id) ON DELETE CASCADE,
   -- Szavazat
@@ -180,7 +180,7 @@ CREATE INDEX idx_votes_member ON votes(member_id);
 -- DOCUMENTS - Dokumentumok
 -- ============================================
 CREATE TABLE IF NOT EXISTS documents (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   meeting_id UUID REFERENCES meetings(id) ON DELETE SET NULL,
   type TEXT NOT NULL CHECK (type IN ('agenda', 'proposal', 'minutes', 'proxy', 'attachment', 'recording', 'other')),
@@ -200,7 +200,7 @@ CREATE INDEX idx_documents_meeting ON documents(meeting_id);
 -- MINUTES - Jegyzőkönyvek
 -- ============================================
 CREATE TABLE IF NOT EXISTS minutes (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   meeting_id UUID REFERENCES meetings(id) ON DELETE CASCADE,
   content TEXT, -- markdown formátumban
   ai_summary TEXT, -- AI által generált összefoglaló
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS minutes (
 -- ATTENDANCE - Jelenléti ív
 -- ============================================
 CREATE TABLE IF NOT EXISTS attendance (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   meeting_id UUID REFERENCES meetings(id) ON DELETE CASCADE,
   member_id UUID REFERENCES members(id) ON DELETE CASCADE,
   checked_in_at TIMESTAMPTZ DEFAULT NOW(),
@@ -234,7 +234,7 @@ CREATE INDEX idx_attendance_meeting ON attendance(meeting_id);
 -- AUDIT_LOG - Audit napló
 -- ============================================
 CREATE TABLE IF NOT EXISTS audit_log (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   user_id UUID REFERENCES auth.users(id),
   member_id UUID REFERENCES members(id),
