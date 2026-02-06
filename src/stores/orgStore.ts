@@ -43,7 +43,7 @@ const initialState = {
   error: null,
 }
 
-export const useOrgStore = create<OrgState>((set, get) => ({
+export const useOrgStore = create<OrgState>((set) => ({
   ...initialState,
 
   fetchOrganizations: async () => {

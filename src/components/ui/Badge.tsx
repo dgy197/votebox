@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'info' | 'gold';
-type BadgeSize = 'sm' | 'md';
+export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'info' | 'gold' | 'primary' | 'secondary';
+export type BadgeSize = 'sm' | 'md' | 'lg';
 
 interface BadgeProps {
   children: ReactNode;
@@ -18,6 +18,8 @@ const variants: Record<BadgeVariant, string> = {
   danger: 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400',
   info: 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
   gold: 'bg-gold-100 text-gold-700 dark:bg-gold-900/30 dark:text-gold-400',
+  primary: 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+  secondary: 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
 };
 
 const dotColors: Record<BadgeVariant, string> = {
@@ -27,11 +29,14 @@ const dotColors: Record<BadgeVariant, string> = {
   danger: 'bg-red-500',
   info: 'bg-blue-500',
   gold: 'bg-gold-500',
+  primary: 'bg-blue-500',
+  secondary: 'bg-gray-500',
 };
 
 const sizes: Record<BadgeSize, string> = {
   sm: 'px-2.5 py-0.5 text-xs',
   md: 'px-3 py-1 text-sm',
+  lg: 'px-4 py-1.5 text-base font-semibold',
 };
 
 export function Badge({ 

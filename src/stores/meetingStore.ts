@@ -109,7 +109,7 @@ const initialState = {
   error: null,
 }
 
-export const useMeetingStore = create<MeetingState>((set, get) => ({
+export const useMeetingStore = create<MeetingState>((set) => ({
   ...initialState,
 
   // ============ MEETINGS ============

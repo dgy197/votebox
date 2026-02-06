@@ -8,6 +8,7 @@ import { VoterLogin } from './pages/auth/VoterLogin'
 import { AdminDashboard } from './pages/admin/AdminDashboard'
 import { VoterDashboard } from './pages/voter/VoterDashboard'
 import SuperAdminDashboard from './pages/super/SuperAdminDashboard'
+import { V3Dashboard } from './pages/v3/V3Dashboard'
 
 // Components
 import { Layout } from './components/layout/Layout'
@@ -23,6 +24,9 @@ function App() {
       <Routes>
         {/* HomePage - full page layout, no wrapper */}
         <Route path="/" element={<HomePage />} />
+        
+        {/* VoteBox 3.0 routes */}
+        <Route path="/v3/*" element={<V3Dashboard />} />
         
         {/* Auth pages - full page layout, no wrapper */}
         <Route path="/admin/login" element={<AdminLogin />} />

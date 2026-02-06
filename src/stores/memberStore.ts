@@ -66,7 +66,7 @@ const initialState = {
   error: null,
 }
 
-export const useMemberStore = create<MemberState>((set, get) => ({
+export const useMemberStore = create<MemberState>((set) => ({
   ...initialState,
 
   fetchMembers: async (orgId: string) => {

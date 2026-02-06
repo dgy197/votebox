@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-interface CardProps {
+export interface CardProps {
   children: ReactNode;
   className?: string;
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
@@ -8,6 +8,7 @@ interface CardProps {
   glass?: boolean;
   accent?: 'none' | 'gold' | 'top';
   style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
 const paddings = {
@@ -26,6 +27,7 @@ export function Card({
   glass = false,
   accent = 'none',
   style,
+  onClick,
 }: CardProps) {
   const accentStyles = {
     none: '',
@@ -44,12 +46,13 @@ export function Card({
         rounded-2xl
         shadow-card
         border border-obsidian-100/50 dark:border-obsidian-800/50
-        ${hover ? 'card-lift hover:shadow-card-hover cursor-pointer' : ''}
+        ${hover || onClick ? 'card-lift hover:shadow-card-hover cursor-pointer' : ''}
         ${accentStyles[accent]}
         ${paddings[padding]}
         ${className}
       `}
       style={style}
+      onClick={onClick}
     >
       {children}
     </div>
