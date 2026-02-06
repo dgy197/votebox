@@ -111,6 +111,14 @@ export function HomePage() {
               </Button>
             </Link>
           </div>
+          
+          {/* VoteBox 3.0 Preview */}
+          <div className="mt-8 animate-fade-up opacity-0 stagger-4" style={{ animationFillMode: 'forwards' }}>
+            <Link to="/v3" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+              VoteBox 3.0 Preview — Súlyozott szavazás, gyűléskezelés
+            </Link>
+          </div>
         </div>
       </section>
 

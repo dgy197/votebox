@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { useMeetingStore } from './meetingStore'
-import type { Meeting, AgendaItem } from '../types/v3'
+import type { Meeting } from '../types/v3'
 
 // Mock Supabase
 vi.mock('../lib/supabase', () => ({
