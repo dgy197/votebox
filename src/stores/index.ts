@@ -3,6 +3,7 @@ export { useOrgStore } from './orgStore'
 export { useMemberStore } from './memberStore'
 export { useMeetingStore } from './meetingStore'
 export { useVoteStore } from './voteStore'
+export { useScheduleStore } from './scheduleStore'
 
 // Legacy stores (v2)
 export { useEventStore } from './eventStore'
