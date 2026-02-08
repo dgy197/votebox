@@ -6,7 +6,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Organizations
 CREATE TABLE organizations (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
   slug TEXT UNIQUE,
   settings JSONB DEFAULT '{}',
@@ -24,7 +24,7 @@ CREATE TABLE users (
 
 -- Events
 CREATE TABLE events (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   name TEXT NOT NULL,
   description TEXT,
@@ -40,7 +40,7 @@ CREATE TABLE events (
 
 -- Participants
 CREATE TABLE participants (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   event_id UUID REFERENCES events(id) ON DELETE CASCADE,
   name TEXT NOT NULL,
   email TEXT,
@@ -53,7 +53,7 @@ CREATE TABLE participants (
 
 -- Questions
 CREATE TABLE questions (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   event_id UUID REFERENCES events(id) ON DELETE CASCADE,
   text_hu TEXT NOT NULL,
   text_en TEXT,
@@ -75,7 +75,7 @@ CREATE TABLE questions (
 
 -- Ballots (anonymous by default)
 CREATE TABLE ballots (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   question_id UUID REFERENCES questions(id) ON DELETE CASCADE,
   participant_id UUID REFERENCES participants(id), -- NULL = anonymous
   choices JSONB NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE ballots (
 
 -- Cast markers (tracks WHO voted, not WHAT)
 CREATE TABLE cast_markers (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   question_id UUID REFERENCES questions(id) ON DELETE CASCADE,
   participant_id UUID REFERENCES participants(id) ON DELETE CASCADE,
   cast_at TIMESTAMPTZ DEFAULT now(),
@@ -93,7 +93,7 @@ CREATE TABLE cast_markers (
 
 -- Audit logs
 CREATE TABLE audit_logs (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   actor_id UUID,
   actor_type TEXT CHECK (actor_type IN ('user', 'participant', 'system')),
   action TEXT NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE audit_logs (
 
 -- Exports
 CREATE TABLE exports (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   event_id UUID REFERENCES events(id) ON DELETE CASCADE,
   format TEXT CHECK (format IN ('json', 'csv', 'pdf')),
   file_url TEXT,

@@ -1,0 +1,61 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - img [ref=e8]
+        - generic [ref=e12]: VoteBox
+      - generic [ref=e13]:
+        - button "HU" [ref=e14]:
+          - img [ref=e15]
+          - generic [ref=e18]: HU
+        - button [ref=e19]:
+          - img [ref=e20]
+  - generic [ref=e23]:
+    - generic [ref=e24]:
+      - img [ref=e25]
+      - text: Biztonságos szervezeti szavazások
+    - heading "Biztonságos Szavazás, Emelt Szinten" [level=1] [ref=e28]:
+      - text: Biztonságos Szavazás,
+      - text: Emelt Szinten
+    - paragraph [ref=e29]: Modern szavazóplatform közgyűlésekhez, testületi ülésekhez és szervezeti döntésekhez. Valós idejű eredmények, biztonságos titkos szavazás.
+    - generic [ref=e30]:
+      - link "Szavazás" [ref=e31] [cursor=pointer]:
+        - /url: /vote
+        - button "Szavazás" [ref=e32]:
+          - img [ref=e33]
+          - text: Szavazás
+      - link "Admin Belépés" [ref=e36] [cursor=pointer]:
+        - /url: /admin/login
+        - button "Admin Belépés" [ref=e37]:
+          - img [ref=e38]
+          - text: Admin Belépés
+    - link "VoteBox 3.0 Preview — Súlyozott szavazás, gyűléskezelés" [ref=e41] [cursor=pointer]:
+      - /url: /v3
+      - text: VoteBox 3.0 Preview — Súlyozott szavazás, gyűléskezelés
+  - generic [ref=e44]:
+    - heading "Miért a VoteBox?" [level=2] [ref=e45]
+    - generic [ref=e46]:
+      - generic [ref=e47] [cursor=pointer]:
+        - img [ref=e49]
+        - heading "Biztonságos" [level=3] [ref=e51]
+        - paragraph [ref=e52]: Titkosított szavazás, auditálható eredmények
+      - generic [ref=e53] [cursor=pointer]:
+        - img [ref=e55]
+        - heading "Valós idejű" [level=3] [ref=e57]
+        - paragraph [ref=e58]: Élő eredmények, azonnali visszajelzés
+      - generic [ref=e59] [cursor=pointer]:
+        - img [ref=e61]
+        - heading "Egyszerű" [level=3] [ref=e66]
+        - paragraph [ref=e67]: Könnyű kezelés, regisztráció nélkül
+  - generic [ref=e70]:
+    - heading "Készen állsz?" [level=2] [ref=e72]
+    - paragraph [ref=e73]: Add meg az eseménykódot és a belépési kódot a biztonságos szavazáshoz.
+    - link "Szavazólap Megnyitása" [ref=e74] [cursor=pointer]:
+      - /url: /vote
+      - button "Szavazólap Megnyitása" [ref=e75]
+  - contentinfo [ref=e76]:
+    - paragraph [ref=e78]: © 2026 VoteBox. Minden jog fenntartva.
+```

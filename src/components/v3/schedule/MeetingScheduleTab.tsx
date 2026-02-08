@@ -143,7 +143,6 @@ export function MeetingScheduleTab({ meeting, currentMember, members = [] }: Mee
 
         {activeTab === 'results' && (
           <ScheduleResults
-            meetingId={meeting.id}
             canSelectWinner={canManage && !isScheduled}
             showVoterDetails={canManage}
           />

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { useScheduleStore, ScheduleOptionWithVotes, VoteSummary } from './scheduleStore'
-import type { ScheduleVote, ScheduleVoteValue } from '../types/v3'
+import { useScheduleStore, type ScheduleOptionWithVotes } from './scheduleStore'
+import type { ScheduleVote } from '../types/v3'
 
 // Mock Supabase
 vi.mock('../lib/supabase', () => ({

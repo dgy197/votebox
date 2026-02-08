@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react'
-import { Users, CheckCircle, AlertTriangle, Info, RefreshCw } from 'lucide-react'
+import { useEffect, useState, useCallback } from 'react'
+import { Users, CheckCircle, AlertTriangle, Info, RefreshCw, Shield } from 'lucide-react'
 import { Card } from '../../ui'
 import { useMeetingStore } from '../../../stores/meetingStore'
-import type { Meeting, QuorumResult, Member } from '../../../types/v3'
+import { calculateQuorumWithProxies, type QuorumWithProxies } from '../../../lib/quorum-service'
+import type { Meeting, QuorumResult, Member, Attendance } from '../../../types/v3'
 
 interface QuorumDisplayProps {
   meeting: Meeting
   members?: Member[]
-  attendance?: { member_id: string; weight_at_checkin: number }[]
+  attendance?: Attendance[]
   compact?: boolean
   showRefresh?: boolean
+  showProxyInfo?: boolean  // Show proxy weight breakdown
 }
 
 export function QuorumDisplay({ 
@@ -17,27 +19,46 @@ export function QuorumDisplay({
   members = [],
   attendance = [],
   compact = false,
-  showRefresh = false
+  showRefresh = false,
+  showProxyInfo = true,
 }: QuorumDisplayProps) {
-  const { calculateQuorum, quorumResult, loading } = useMeetingStore()
+  const { calculateQuorum, loading } = useMeetingStore()
   const [refreshing, setRefreshing] = useState(false)
+  const [proxyQuorumResult, setProxyQuorumResult] = useState<QuorumWithProxies | null>(null)
 
-  // Calculate quorum on mount and when attendance changes
-  useEffect(() => {
+  // Calculate quorum with proxy support
+  const fetchQuorumWithProxies = useCallback(async () => {
     if (meeting.status === 'in_progress' || meeting.status === 'scheduled') {
-      calculateQuorum(meeting.id)
+      try {
+        const result = await calculateQuorumWithProxies(
+          meeting.id,
+          meeting.org_id,
+          members,
+          attendance,
+          meeting.quorum_percentage
+        )
+        setProxyQuorumResult(result)
+      } catch (err) {
+        console.error('Error calculating quorum with proxies:', err)
+        // Fall back to store-based calculation
+        calculateQuorum(meeting.id)
+      }
     }
-  }, [meeting.id, meeting.status, attendance.length])
+  }, [meeting.id, meeting.org_id, meeting.status, meeting.quorum_percentage, members, attendance])
+
+  useEffect(() => {
+    fetchQuorumWithProxies()
+  }, [fetchQuorumWithProxies])
 
   const handleRefresh = async () => {
     setRefreshing(true)
-    await calculateQuorum(meeting.id)
+    await fetchQuorumWithProxies()
     setRefreshing(false)
   }
 
-  // Calculate local values if no RPC result
-  const localQuorumResult = (): QuorumResult | null => {
-    if (quorumResult) return quorumResult
+  // Calculate local values if no proxy result
+  const localQuorumResult = (): QuorumWithProxies | null => {
+    if (proxyQuorumResult) return proxyQuorumResult
 
     const totalWeight = members
       .filter(m => m.is_active && m.role !== 'observer')
@@ -53,11 +74,17 @@ export function QuorumDisplay({
       present_weight: presentWeight,
       quorum_percentage: percentage,
       quorum_reached: reached,
+      present_members: attendance.length,
+      total_members: members.filter(m => m.is_active && m.role !== 'observer').length,
+      proxy_weight: 0,
+      effective_present_weight: presentWeight,
     }
   }
 
   const result = localQuorumResult()
   if (!result) return null
+  
+  const hasProxyWeight = result.proxy_weight > 0
 
   const quorumType = {
     majority: 'Egyszerű többség',
@@ -190,7 +217,7 @@ export function QuorumDisplay({
       {/* Details */}
       <div className="grid grid-cols-2 gap-4 text-sm">
         <div className="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-          <div className="text-gray-500 dark:text-gray-400 mb-1">Jelen lévő súly</div>
+          <div className="text-gray-500 dark:text-gray-400 mb-1">Személyes jelenlét</div>
           <div className="text-xl font-bold text-gray-900 dark:text-white">
             {result.present_weight.toFixed(2)}
           </div>
@@ -202,6 +229,32 @@ export function QuorumDisplay({
           </div>
         </div>
       </div>
+
+      {/* Proxy weight info */}
+      {showProxyInfo && hasProxyWeight && (
+        <div className="mt-4 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <Shield className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+            <span className="font-medium text-purple-800 dark:text-purple-300">
+              Meghatalmazások
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div className="text-purple-600 dark:text-purple-400">Proxy súly</div>
+              <div className="font-bold text-purple-800 dark:text-purple-200">
+                +{result.proxy_weight.toFixed(2)}
+              </div>
+            </div>
+            <div>
+              <div className="text-purple-600 dark:text-purple-400">Effektív jelenlét</div>
+              <div className="font-bold text-purple-800 dark:text-purple-200">
+                {result.effective_present_weight.toFixed(2)}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Quorum type info */}
       <div className="mt-4 flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-sm">

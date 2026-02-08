@@ -33,7 +33,6 @@ export function ProxyVotingPanel({
     submitVote, 
     checkIfVoted, 
     hasVoted, 
-    loading, 
     error,
     setCurrentAgendaItem,
     subscribeToVotes,

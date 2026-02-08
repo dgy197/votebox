@@ -11,3 +11,9 @@ export {
   useVoting,
   useConnectionStatus
 } from './useRealtime'
+
+export {
+  useRealtimeVotes,
+  useVotingState,
+  useVotePresence
+} from './useRealtimeVotes'

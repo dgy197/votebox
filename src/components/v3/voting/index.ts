@@ -1,5 +1,7 @@
 export { VotingPanel } from './VotingPanel'
 export { VoteResults } from './VoteResults'
+export { VotingCard } from './VotingCard'
+export { VotingResults } from './VotingResults'
 export { ProxyVotingPanel } from './ProxyVotingPanel'
 export { QuorumDisplay } from './QuorumDisplay'
 export { SecretBallotPanel } from './SecretBallotPanel'

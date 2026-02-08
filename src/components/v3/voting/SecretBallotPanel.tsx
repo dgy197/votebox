@@ -18,7 +18,6 @@ export function SecretBallotPanel({ agendaItem, member, onVoteSubmitted }: Secre
     submitVote, 
     checkIfVoted, 
     hasVoted, 
-    loading, 
     error,
     setCurrentAgendaItem,
   } = useVoteStore()

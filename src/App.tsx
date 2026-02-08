@@ -9,6 +9,7 @@ import { AdminDashboard } from './pages/admin/AdminDashboard'
 import { VoterDashboard } from './pages/voter/VoterDashboard'
 import SuperAdminDashboard from './pages/super/SuperAdminDashboard'
 import { V3Dashboard } from './pages/v3/V3Dashboard'
+import { ScheduleMeeting } from './pages/ScheduleMeeting'
 
 // Components
 import { Layout } from './components/layout/Layout'
@@ -27,6 +28,9 @@ function App() {
         
         {/* VoteBox 3.0 routes */}
         <Route path="/v3/*" element={<V3Dashboard />} />
+        
+        {/* Schedule meeting (Doodle-style) */}
+        <Route path="/schedule/:meetingId" element={<ScheduleMeeting />} />
         
         {/* Auth pages - full page layout, no wrapper */}
         <Route path="/admin/login" element={<AdminLogin />} />

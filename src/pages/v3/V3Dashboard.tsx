@@ -2,7 +2,7 @@ import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 import { Layout } from '../../components/layout/Layout'
 import { OrganizationList, OrganizationForm, OrganizationSettings } from '../../components/v3/organization'
 import { OrgDashboard } from './OrgDashboard'
-import { MeetingPage } from './MeetingPage'
+import { MeetingDetail } from '../MeetingDetail'
 
 export function V3Dashboard() {
   return (
@@ -14,13 +14,21 @@ export function V3Dashboard() {
         <Route path="/org/:orgId" element={<OrgDashboard />} />
         <Route path="/org/:orgId/settings" element={<OrganizationSettings />} />
         <Route path="/org/:orgId/meeting/new" element={<MeetingNewPage />} />
-        <Route path="/org/:orgId/meeting/:meetingId" element={<MeetingPage />} />
+        <Route path="/org/:orgId/meeting/:meetingId" element={<MeetingDetail />} />
+        
+        {/* Direct meeting route */}
+        <Route path="/meetings/:meetingId" element={<MeetingDetailWrapper />} />
         
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/v3" replace />} />
       </Routes>
     </Layout>
   )
+}
+
+function MeetingDetailWrapper() {
+  // Wrapper for /meetings/:id route without orgId in URL
+  return <MeetingDetail />
 }
 
 function MeetingNewPage() {
