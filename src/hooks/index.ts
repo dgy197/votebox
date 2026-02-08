@@ -17,3 +17,8 @@ export {
   useVotingState,
   useVotePresence
 } from './useRealtimeVotes'
+
+export {
+  useRealtimeQuorum,
+  useAttendanceSubscription
+} from './useRealtimeQuorum'

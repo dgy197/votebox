@@ -7,7 +7,7 @@ export { OrganizationList, OrganizationForm, OrganizationSettings } from './orga
 export { MemberList, MemberForm, CSVImportModal } from './member'
 
 // Meetings
-export { MeetingList, MeetingWizard, AgendaEditor } from './meeting'
+export { MeetingList, MeetingWizard, AgendaEditor, MeetingDashboard, QuorumWidget } from './meeting'
 
 // Voting
 export { VotingPanel, VoteResults, ProxyVotingPanel, QuorumDisplay, SecretBallotPanel, VotingCard, VotingResults } from './voting'
@@ -17,6 +17,9 @@ export { ScheduleCreator, ScheduleVoting, ScheduleResults, MeetingScheduleTab } 
 
 // Attendance
 export { AttendanceList } from './attendance'
+
+// Quorum
+export { QuorumTracker } from './quorum'
 
 // Minutes
 export { MinutesGenerator, MinutesPdfExport } from './minutes'
